@@ -51,12 +51,13 @@ async function handleRequest(request) {
     const username = hpp_username.split(",");
     const password = hpp_password.split(",");
     //console.log(hpp_logstatus)
+    let tmp = 0;
     for (var i = 0; i < getJsonLength(username); i++) {
       if (getCookie(request, "password") == md5(password[i]) && getCookie(request, "username") == md5(username[i])) {
-        hpp_logstatus = 1
+        tmp = 1;
       }
     }
-
+    hpp_logstatus = tmp;
     if (path.startsWith('/hpp/admin')) {
       if (hpp_logstatus == 1) {
         const hpp_config = await KVNAME.get("hpp_config");
