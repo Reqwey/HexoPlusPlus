@@ -1267,7 +1267,7 @@ login();
 
         return Response.redirect('https://' + domain + '/hpp/admin/login', 302)
       }
-      return Response.redirect('https://' + domain + '/hpp/admin/dash', 302)
+      return Response.redirect('https://' + domain + '/hpp/admin/dash/home', 302)
     }
     if (path.startsWith('/hpp/api')) {
       if (path == "/hpp/api/getblogeractive") {
