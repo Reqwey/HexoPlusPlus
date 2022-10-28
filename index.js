@@ -60,7 +60,7 @@ async function handleRequest(request) {
     if (path.startsWith('/hpp/admin')) {
       if (hpp_logstatus == 1) {
         const hpp_config = await KVNAME.get("hpp_config");
-        if (hpp_config === null) {
+        if (!hpp_config) {
           if (path == '/hpp/admin/api/upconfig') {
             const config_r = JSON.stringify(await request.text())
             await KVNAME.put("hpp_config", config_r)
@@ -965,7 +965,7 @@ ${hpp_js}
           }
           if (path == "/hpp/admin/api/getlist") {
             let hpp_doc_list_index = await KVNAME.get("hpp_doc_list_index")
-            if (hpp_doc_list_index === null) {
+            if (!hpp_doc_list_index) {
               const filepath = githubdocpath.substr(0, (githubdocpath).length - 1)
               const url = `https://api.github.com/repos/${hpp_githubdocusername}/${hpp_githubdocrepo}/contents${filepath}?ref=${hpp_githubdocbranch}`
               hpp_doc_list_index = await JSON.stringify(await fetch_bfs([], url, hpp_githubgetdocinit))
@@ -984,7 +984,7 @@ ${hpp_js}
           }
           if (path == "/hpp/admin/api/get_draftlist") {
             let hpp_doc_draft_list_index = await KVNAME.get("hpp_doc_draft_list_index")
-            if (hpp_doc_draft_list_index === null) {
+            if (!hpp_doc_draft_list_index) {
               const filepath = githubdocdraftpath.substr(0, (githubdocdraftpath).length - 1)
               const url = `https://api.github.com/repos/${hpp_githubdocusername}/${hpp_githubdocrepo}/contents${filepath}?ref=${hpp_githubdocbranch}`
               hpp_doc_draft_list_index = await JSON.stringify(await fetch_bfs([], url, hpp_githubgetdocinit))
@@ -1016,10 +1016,10 @@ ${hpp_js}
 
           if (path == "/hpp/admin/api/addtalk") {
             let hpp_talk_re = await KVNAME.get("hpp_talk_data")
-            if (hpp_talk_re === null) { hpp_talk_re = "[]" }
+            if (!hpp_talk_re) { hpp_talk_re = "[]" }
             let hpp_talk = await JSON.parse(hpp_talk_re);
             let hpp_talk_id_re = await KVNAME.get("hpp_talk_id")
-            if (hpp_talk_id_re === null) { hpp_talk_id_re = 0 }
+            if (!hpp_talk_id_re) { hpp_talk_id_re = 0 }
             let hpp_talk_id = hpp_talk_id_re;
             hpp_talk_id++;
             const now = await request.json()
@@ -1088,10 +1088,10 @@ ${hpp_js}
           }
           if (path == "/hpp/admin/api/inputtalk") {
             let hpp_talk_re = await KVNAME.get("hpp_talk_data")
-            if (hpp_talk_re === null) { hpp_talk_re = "[]" }
+            if (!hpp_talk_re) { hpp_talk_re = "[]" }
             let hpp_talk = await JSON.parse(hpp_talk_re);
             let hpp_talk_id_re = await KVNAME.get("hpp_talk_id")
-            if (hpp_talk_id_re === null) { hpp_talk_id_re = 0 }
+            if (!hpp_talk_id_re) { hpp_talk_id_re = 0 }
             let hpp_talk_id = hpp_talk_id_re;
             let now = await JSON.parse(await request.text())
             let talk_init = {}
