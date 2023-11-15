@@ -326,7 +326,7 @@ var ajax = ajaxObject();
 				}
 				del_same(arr_list)
 				for(var i=0;i<getJsonLength(arr_list);i++){
-					document.getElementById("choo").innerHTML+=`<option>${arr_list[i]}</option>`
+					document.getElementById("choo").innerHTML+=`<option value='${arr_list[i]}'>${arr_list[i]}</option>`
 				}
 				$('#choo').editableSelect();
 				choo.placeholder = "选择一个文件或直接新增一个文件"
